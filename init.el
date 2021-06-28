@@ -28,7 +28,7 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-;; Define he following variables to remove the compile-log warnings
+;; Define the following variables to remove the compile-log warnings
 ;; when defining ido-ubiquitous
 ;; (defvar ido-cur-item nil)
 ;; (defvar ido-default-item nil)
@@ -143,6 +143,7 @@
 (load "setup-clojure.el")
 (load "setup-js.el")
 (load "setup-org-mode.el")
+;; (load "setup-scheme.el") ;; uncomment once you've installed mit-scheme
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

@@ -10,3 +10,8 @@
 
 ;; Go straight to scratch buffer on startup
 (setq inhibit-startup-message t)
+
+;; on mac os x, fixes error 'does not support --dired; see `dired-use-ls-dired'
+;; for more details.'
+(when (string= system-type "darwin")
+  (setq dired-use-ls-dired nil))

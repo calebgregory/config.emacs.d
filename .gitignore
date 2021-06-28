@@ -2,22 +2,7 @@ elpa
 auto-save-list
 backups
 .recentf
-
-;; ----- smex-history -----
-(
- cd
- 5x5
- arp
- dbx
- dig
- erc
- ert
-)
-
-;; ----- smex-data -----
-(
- 
-)
 ido.last
 projectile-bookmarks.eld
 .smex-items
+cider-history

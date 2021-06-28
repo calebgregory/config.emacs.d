@@ -1,0 +1,195 @@
+
+<!-- saved from url=(0071)https://groups.csail.mit.edu/mac/ftpdir/scheme-7.4/doc-html/user_7.html -->
+<html class="gr__groups_csail_mit_edu"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<!-- This HTML file has been created by texi2html 1.54
+     from user.texinfo on 22 March 1999 -->
+
+<title>MIT Scheme User's Manual - GNU Emacs Interface</title>
+<link href="https://groups.csail.mit.edu/mac/ftpdir/scheme-7.4/doc-html/user_8.html" rel="Next">
+<link href="https://groups.csail.mit.edu/mac/ftpdir/scheme-7.4/doc-html/user_6.html" rel="Previous">
+<link href="https://groups.csail.mit.edu/mac/ftpdir/scheme-7.4/doc-html/user_toc.html" rel="ToC">
+
+<style></style><script type="text/javascript" src="chrome-extension://aadgmnobpdmgmigaicncghmmoeflnamj/ng-inspector.js"></script></head>
+<body style="" data-gr-c-s-loaded="true">
+<p>Go to the <a href="https://groups.csail.mit.edu/mac/ftpdir/scheme-7.4/doc-html/user_1.html">first</a>, <a href="https://groups.csail.mit.edu/mac/ftpdir/scheme-7.4/doc-html/user_6.html">previous</a>, <a href="https://groups.csail.mit.edu/mac/ftpdir/scheme-7.4/doc-html/user_8.html">next</a>, <a href="https://groups.csail.mit.edu/mac/ftpdir/scheme-7.4/doc-html/user_11.html">last</a> section, <a href="https://groups.csail.mit.edu/mac/ftpdir/scheme-7.4/doc-html/user_toc.html">table of contents</a>.
+</p><p></p><hr><p>
+
+
+</p><h1><a name="SEC54" href="https://groups.csail.mit.edu/mac/ftpdir/scheme-7.4/doc-html/user_toc.html#TOC54">GNU Emacs Interface</a></h1>
+
+<p>
+There is an interface library, called <tt>`xscheme'</tt>, distributed with
+MIT Scheme and GNU Emacs, which facilitates running Scheme as a
+subprocess of Emacs.  If you wish to use this interface, please install
+the version of <tt>`xscheme.el'</tt> that comes with MIT Scheme, as it is
+guaranteed to be correct for your version of Scheme.
+
+</p>
+<p>
+Note that this interface is supported under Unix only.  We have explored
+the possibility of making it work under OS/2 and concluded that it is
+impossible.
+
+</p>
+<p>
+<a name="IDX274"></a>
+<a name="IDX275"></a>
+To invoke Scheme from Emacs, use <kbd>M-x run-scheme</kbd>, which is defined
+when either of the libraries <tt>`scheme'</tt> or <tt>`xscheme'</tt> is loaded.
+You may give <code>run-scheme</code> a prefix argument, in which case it will
+allow you to edit the command line that is used to invoke Scheme.
+<em>Do not</em> remove the <samp>`-emacs'</samp> option!
+
+</p>
+<p>
+<em>Note carefully:</em> In Emacs 19, the <code>run-scheme</code> command
+exists, but is different from the one described here!  In order to get
+this interface, you must load the <tt>`xscheme'</tt> library before
+executing <code>run-scheme</code>.
+
+</p>
+<p>
+<a name="IDX276"></a>
+Scheme will be started up as a subprocess in a buffer called
+<samp>`*scheme*'</samp>.  This buffer will be in <code>scheme-interaction-mode</code>
+and all output from the Scheme process will go there.  The mode line for
+the <samp>`*scheme*'</samp> buffer will have this form:
+
+</p>
+
+<pre>--**-*scheme*: 1 [Evaluator]           (Scheme Interaction: input)------
+</pre>
+
+<p>
+<a name="IDX277"></a>
+The first field, showing <samp>`1'</samp> in this example, is the level number.
+
+</p>
+<p>
+The second field, showing <samp>`[Evaluator]'</samp> in this example, describes
+the type of REPL that is running.  Other values include:
+
+</p>
+
+<pre>[Debugger]
+[Where]
+</pre>
+
+<p>
+The <strong>mode</strong> after <samp>`Scheme Interaction'</samp> is one of:
+
+</p>
+<dl compact="">
+
+<dt><samp>`input'</samp>
+</dt><dd>
+Scheme is waiting for input.
+
+</dd><dt><samp>`run'</samp>
+</dt><dd>
+Scheme is running an evaluation.
+
+</dd><dt><samp>`gc'</samp>
+</dt><dd>
+Scheme is garbage collecting.
+</dd></dl>
+
+<p>
+<a name="IDX278"></a>
+When <tt>`xscheme'</tt> is loaded, <code>scheme-mode</code> is extended to include
+commands for evaluating expressions (do <kbd>C-h m</kbd> in any
+<code>scheme-mode</code> buffer for the most up-to-date information):
+
+</p>
+<dl compact="">
+
+<dt><kbd><kbd>ESC</kbd> o</kbd>
+</dt><dd>
+<a name="IDX279"></a>
+<a name="IDX280"></a>
+Evaluates the current buffer (<code>xscheme-send-buffer</code>).
+
+</dd><dt><kbd><kbd>ESC</kbd> z</kbd>
+</dt><dd>
+<a name="IDX281"></a>
+<a name="IDX282"></a>
+Evaluates the current definition (<code>xscheme-send-definition</code>).  This
+is also bound to <kbd><kbd>ESC</kbd> C-x</kbd>.
+
+</dd><dt><kbd><kbd>ESC</kbd> C-z</kbd>
+</dt><dd>
+<a name="IDX283"></a>
+<a name="IDX284"></a>
+Evaluates the current region (<code>xscheme-send-region</code>).
+
+</dd><dt><kbd>C-x C-e</kbd>
+</dt><dd>
+<a name="IDX285"></a>
+<a name="IDX286"></a>
+Evaluates the expression to the left of point
+(<code>xscheme-send-previous-expression</code>).  This is also bound to
+<kbd><kbd>ESC</kbd> <kbd>RET</kbd></kbd>.
+
+</dd><dt><kbd>C-c C-s</kbd>
+</dt><dd>
+<a name="IDX287"></a>
+<a name="IDX288"></a>
+Selects the <samp>`*scheme*'</samp> buffer and places you at its end
+(<code>xscheme-select-process-buffer</code>).
+
+</dd><dt><kbd>C-c C-y</kbd>
+</dt><dd>
+<a name="IDX289"></a>
+<a name="IDX290"></a>
+Yanks the most recently evaluated expression, placing it at point
+(<code>xscheme-yank-previous-send</code>).  This works only in the
+<samp>`*scheme*'</samp> buffer.
+</dd></dl>
+
+<p>
+The following commands provide interrupt capability:
+
+</p>
+<dl compact="">
+
+<dt><kbd>C-c C-c</kbd>
+</dt><dd>
+<a name="IDX291"></a>
+<a name="IDX292"></a>
+Like typing <kbd>C-g</kbd> when running Scheme without Emacs.<br>
+(<code>xscheme-send-control-g-interrupt</code>)
+
+</dd><dt><kbd>C-c C-x</kbd>
+</dt><dd>
+<a name="IDX293"></a>
+<a name="IDX294"></a>
+Like typing <kbd>C-c C-x</kbd> when running Scheme without Emacs.<br>
+(<code>xscheme-send-control-x-interrupt</code>)
+
+</dd><dt><kbd>C-c C-u</kbd>
+</dt><dd>
+<a name="IDX295"></a>
+<a name="IDX296"></a>
+Like typing <kbd>C-c C-u</kbd> when running Scheme without Emacs.<br>
+(<code>xscheme-send-control-u-interrupt</code>)
+
+</dd><dt><kbd>C-c C-b</kbd>
+</dt><dd>
+<a name="IDX297"></a>
+<a name="IDX298"></a>
+Like typing <kbd>C-c C-b</kbd> when running Scheme without Emacs.<br>
+(<code>xscheme-send-breakpoint-interrupt</code>)
+
+</dd><dt><kbd>C-c C-p</kbd>
+</dt><dd>
+<a name="IDX299"></a>
+<a name="IDX300"></a>
+Like evaluating <code>(proceed)</code> or <code>(continue)</code>.<br>
+(<code>xscheme-send-proceed</code>)
+</dd></dl>
+
+<p></p><hr><p>
+</p><p>Go to the <a href="https://groups.csail.mit.edu/mac/ftpdir/scheme-7.4/doc-html/user_1.html">first</a>, <a href="https://groups.csail.mit.edu/mac/ftpdir/scheme-7.4/doc-html/user_6.html">previous</a>, <a href="https://groups.csail.mit.edu/mac/ftpdir/scheme-7.4/doc-html/user_8.html">next</a>, <a href="https://groups.csail.mit.edu/mac/ftpdir/scheme-7.4/doc-html/user_11.html">last</a> section, <a href="https://groups.csail.mit.edu/mac/ftpdir/scheme-7.4/doc-html/user_toc.html">table of contents</a>.
+
+
+</p></body></html>
