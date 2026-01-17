@@ -36,8 +36,11 @@
 ;; (defvar predicate nil)
 ;; (defvar inherit-input-method nil)
 
-;; The packages you want installed. You can also install these
-;; manually with M-x package-install
+;; The packages you want installed.
+;;
+;; M-x package-list-packages will show you almost every package available; just
+;; make sure you run M-x package-refresh-contents first so you get the latest
+;; list. You can manually install packages with M-x package-install.
 ;; Add in your own as you wish:
 (defvar my-packages
   '(;; makes handling lisp expressions much, much easier
